@@ -4,12 +4,12 @@ from tkinter import filedialog
 from tkinter.filedialog import askopenfile
 from PIL import Image, ImageTk
 import numpy as np
-#from nn import model
+from nn import model
 import matplotlib.pyplot as plt
 
 imgarr = []
 my_w = tk.Tk()
-my_w.geometry("450x500")  # Size of the window 
+my_w.geometry("450x500")
 my_w.title('DT project')
 my_font1=('ariel', 18, 'bold')
 l1 = tk.Label(my_w,text='Number Recognition',width=30,font=my_font1) 
@@ -43,13 +43,13 @@ def upload_file():
         img=ImageTk.PhotoImage(img)
         e1 =tk.Label(my_w)
         e1.grid(row=row,column=col)
-        e1.image = img # keep a reference! by attaching it to a widget attribute
-        e1['image']=img # Show Image  
-        if(col==3): # start new line after third column
-            row=row+1# start wtih next row
-            col=1    # start with first column
-        else:       # within the same row 
-            col=col+1 # increase to next column  
+        e1.image = img 
+        e1['image']=img
+        if(col==3): 
+            row=row+1
+            col=1
+        else:
+            col=col+1
 
 def rgb2gray(rgb):
     return np.dot(rgb[...,:3], [0.2989, 0.5870, 0.1140])
@@ -60,8 +60,6 @@ def process(imgarr):
         print(x.shape == (28,28,3))
         if x.shape == (28,28,3):
             imgarr[i] = rgb2gray(x)
-        print(x.shape)
-        print("==")
 
     imgarr = np.array(imgarr)
     print(imgarr.shape,type(imgarr))
